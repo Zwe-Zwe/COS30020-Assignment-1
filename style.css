@@ -382,7 +382,7 @@ nav {
 }
 
 #reg-container{
-    margin-top: 15vh;
+    margin-top: 5%;
     width: 100%;
 }
 
@@ -392,6 +392,23 @@ nav {
 
 .custom-btn{
     width: 100%;
+}
+
+.input-container {
+    position: relative; /* Make this container relatively positioned */
+    margin-bottom: 1em; /* Space for error message */
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875em; /* Smaller font size */
+    position: absolute; /* Position absolute to not affect layout */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    top: 100%; /* Place below the input field */
+    left: 0; /* Align to the left of the input field */
+    width: 100%; /* Make it take full width of the input container */
+    box-sizing: border-box; /* Include padding in the width */
 }
 
 /* Login Form */
