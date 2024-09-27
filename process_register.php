@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start session to store error messages
+session_start();
 
 // Function to validate email format
 function validateEmail($email) {
@@ -9,6 +9,24 @@ function validateEmail($email) {
 // Function to validate password complexity
 function validatePassword($password) {
     return preg_match('/^(?=.*\d)(?=.*[\W_]).{8,}$/', $password);
+}
+
+// Function to check if the email already exists in the file
+function isEmailTaken($email, $file) {
+    if (!file_exists($file)) {
+        return false; // File doesn't exist, so no email is taken yet
+    }
+    
+    $lines = file($file); // Read all lines from the file
+    foreach ($lines as $line) {
+        $user_data = explode('|', $line);
+        foreach ($user_data as $data) {
+            if (strpos($data, "Email:$email") !== false) {
+                return true; // Email already exists
+            }
+        }
+    }
+    return false;
 }
 
 // File path
@@ -24,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $home_town = isset($_POST["home_town"]) ? trim($_POST["home_town"]) : '';
     $password = isset($_POST["password"]) ? $_POST["password"] : '';
     $confirm_password = isset($_POST["confirm_password"]) ? $_POST["confirm_password"] : '';
-    
+
     // Validate form data
     $errors = [];
 
@@ -32,11 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($first_name)) {
         $errors['first_name'] = "First name cannot be empty.";
     }
-    
+
     if (empty($last_name)) {
         $errors['last_name'] = "Last name cannot be empty.";
     }
-    
+
     if (empty($dob)) {
         $errors['dob'] = "Date of Birth cannot be empty.";
     }
@@ -61,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($first_name) && !preg_match("/^[a-zA-Z\s]+$/", $first_name)) {
         $errors['first_name'] = "First name must contain only alphabets and spaces.";
     }
-    
+
     if (!empty($last_name) && !preg_match("/^[a-zA-Z\s]+$/", $last_name)) {
         $errors['last_name'] = "Last name must contain only alphabets and spaces.";
     }
@@ -69,6 +87,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate email format if not empty
     if (!empty($email) && !validateEmail($email)) {
         $errors['email'] = "Invalid email format.";
+    }
+
+    // Check if the email is already taken
+    if (!empty($email) && isEmailTaken($email, $file)) {
+        $errors['email'] = "This email is already registered.";
     }
 
     // Validate password complexity if not empty
@@ -81,18 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['confirm_password'] = "Password and Confirm Password do not match.";
     }
 
-    // Check if email already exists in the file if email is not empty
-    if (!empty($email) && file_exists($file)) {
-        $file_data = file($file);
-        foreach ($file_data as $line) {
-            $line_data = explode('|', $line);
-            if (trim($line_data[4]) === $email) {
-                $errors['email'] = "The email address is already registered.";
-                break;
-            }
-        }
-    }
-
+    // If there are no errors, save the data to the file
     if (empty($errors)) {
         // Format the user record
         $user_data = "First Name:$first_name|Last Name:$last_name|DOB:$dob|Gender:$gender|Email:$email|Hometown:$home_town|Password:$password\n";
@@ -100,8 +112,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Save the data into the text file
         file_put_contents($file, $user_data, FILE_APPEND);
 
-        // Redirect to login page if successful
-        header("Location: login.php");
+        // Set a session variable to indicate success
+        $_SESSION['registration_success'] = true;
+        header("Location: registration.php");
         exit();
     } else {
         // Store errors in session and redirect back to form
@@ -111,4 +124,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
+
 ?>

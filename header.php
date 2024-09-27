@@ -9,8 +9,23 @@
         </div>
         <div class="nav-right">
             <a href="main_menu.php" class="nav-link">Menu</a>
-            <a href="login.php" class="nav-link">Login</a>
-            <a href="registration.php" class="nav-link">Sign Up</a>
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                <!-- Show user icon based on gender if gender is set -->
+                <?php if (isset($_SESSION['gender']) && $_SESSION['gender'] === 'Male'): ?>
+                    <div class="user-container">
+                        <img src="img/man.png" alt="User Icon" class="nav-icon">
+                        <a href="logout.php" class="nav-link logout-link">Logout</a>
+                    </div>
+                <?php elseif (isset($_SESSION['gender']) && $_SESSION['gender'] === 'Female'): ?>
+                    <div class="user-container">
+                        <img src="img/woman.png" alt="User Icon" class="nav-icon">
+                        <a href="logout.php" class="nav-link logout-link">Logout</a>
+                    </div>
+                <?php endif; ?>
+            <?php else: ?>
+                <!-- Show login link if not logged in -->
+                <a href="login.php" class="nav-link">Login</a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

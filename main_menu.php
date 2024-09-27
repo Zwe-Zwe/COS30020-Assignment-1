@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php include_once "head.php" ?>
 <body id="menu-body">
     <?php include_once "header.php" ?>

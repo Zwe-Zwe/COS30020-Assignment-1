@@ -1,6 +1,5 @@
+<?php session_start(); ?>
 <?php
-session_start(); // Start session to access error messages
-
 // Retrieve errors and form data from the session
 $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
 $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
@@ -17,6 +16,13 @@ unset($_SESSION['form_data']);
     <div class="container d-flex justify-content-center" id="reg-container">
         <form class="p-2" id="reg-form" action="process_register.php" method="POST">
             <legend class="text-center display-7 mb-3 mt-3">Create an account</legend>
+            <?php if (isset($_SESSION['registration_success']) && $_SESSION['registration_success'] === true): ?>
+                <div class="alert alert-success">
+                    Registration successful! Redirecting to login page...
+                </div>
+                <meta http-equiv="refresh" content="3;url=login.php">
+                <?php unset($_SESSION['registration_success']); ?>
+            <?php endif; ?>
             <div class="row mb-3 p-3">
                 <div class="col-md-6 mb-3 input-container">
                     <input type="text" name="first_name" id="first-name" class="custom-input" placeholder="First Name" value="<?= htmlspecialchars($form_data['first_name'] ?? '') ?>">
@@ -29,7 +35,6 @@ unset($_SESSION['form_data']);
                     <?php if (isset($errors['last_name'])): ?>
                         <p class="error-message"><?= htmlspecialchars($errors['last_name']) ?></p>
                     <?php endif; ?>
-                </div>
             </div>
             <div class="row mb-3 p-3">
                 <div class="col-md-6 mb-3 input-container">
