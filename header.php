@@ -1,7 +1,7 @@
 <nav>
     <div class="nav-container">
         <div class="nav-left">
-            <h2>Herbarium for Plant Biodiversity</h2>
+            <h2>HERBARIUM FOR PLANT BIODERVISITY</h2>
         </div>
         <div class="nav-middle">
             <a href="index.php"><img src="img/logo.png" alt="Logo" class="nav-logo" id="default-logo"></a>
@@ -14,12 +14,16 @@
                 <?php if (isset($_SESSION['gender']) && $_SESSION['gender'] === 'Male'): ?>
                     <div class="user-container">
                         <img src="img/man.png" alt="User Icon" class="nav-icon">
-                        <a href="logout.php" class="nav-link logout-link">Logout</a>
+                        <div class="user-content">
+                            <a href="logout.php" class="nav-link logout-link">Logout</a>
+                        </div>     
                     </div>
                 <?php elseif (isset($_SESSION['gender']) && $_SESSION['gender'] === 'Female'): ?>
                     <div class="user-container">
                         <img src="img/woman.png" alt="User Icon" class="nav-icon">
-                        <a href="logout.php" class="nav-link logout-link">Logout</a>
+                        <div class="user-content">
+                            <a href="logout.php" class="nav-link logout-link">Logout</a>
+                        </div>     
                     </div>
                 <?php endif; ?>
             <?php else: ?>

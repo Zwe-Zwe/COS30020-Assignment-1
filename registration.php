@@ -8,8 +8,6 @@ $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['errors']);
 unset($_SESSION['form_data']);
 ?>
-
-
 <?php include_once "head.php"; ?>
 <body id="reg-body">
     <?php include_once "header.php"; ?>
@@ -83,12 +81,13 @@ unset($_SESSION['form_data']);
                     <?php endif; ?>
                 </div>
             </div>
+            
             <div class="row mb-3 p-3">
                 <div class="col-md-6 mb-3 d-flex justify-content-center">
                     <input type="submit" class="btn btn-primary rounded-0 d-flex custom-btn" value="Submit">
                 </div>
                 <div class="col-md-6 mb-3 d-flex justify-content-center">
-                    <input type="reset" class="btn btn-primary rounded-0 d-flex custom-btn" value="Reset">
+                    <input type="reset" class="btn btn-primary rounded-0 d-flex custom-btn" value="Reset" onclick="clearErrors()">
                 </div>
             </div>
         </form>

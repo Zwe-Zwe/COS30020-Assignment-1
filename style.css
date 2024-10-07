@@ -1,9 +1,28 @@
 /* Reset margins and padding */
+:-webkit-scrollbar {
+    width: 6px;  /* Width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;  /* Color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;  /* Color of the scroll thumb */
+    border-radius: 3px;  /* Roundness of the scroll thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;  /* Color of the scroll thumb on hover */
+}
+ 
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-       
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
 }
 
 html, body {
@@ -113,12 +132,29 @@ nav {
 }
 
 .nav-icon{
-    width: 3vw;
+    width: 2.5vw;
     height: auto;
+    padding-left: 1.4vh;
+}
+
+.user-container{
+    position: relative;
+    display: inline-block;
+}
+
+.user-content{
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    z-index: 1;
+    padding-top: 3vh;
 }
 
 
 
+.user-container:hover .user-content{
+    display: block;
+}
 
 
 /* Fading animation */
@@ -220,6 +256,7 @@ nav {
 
 /* Index Content 1 */
 #index-body{
+    width: 100vw;
     background-color: #F2F2F0;
 }
 
@@ -497,14 +534,20 @@ footer p{
 /* Classify Page */
 
 .classify-container{
-    margin-top: 10vh;
+    margin-top: 15vh;
     margin-bottom: 10vh;
 }
 
 .classification-header {
-    margin-top: 30px;
+    margin-top: 1vh;
+    margin-bottom: 3vh;
     color: #343a40;
 }
+
+.classify-img{
+    text-align: center;
+}
+
 .classification-content {
     background-color: #ffffff;
     padding: 30px;
@@ -521,6 +564,9 @@ footer p{
     line-height: 1.8;
 }
 
+h5.classify-titles {
+    color: #028A0F;
+}
 
 
 @media screen and (max-width: 768px) {

@@ -104,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['confirm_password'] = "Password and Confirm Password do not match.";
     }
 
+
     // If there are no errors, save the data to the file
     if (empty($errors)) {
         // Format the user record

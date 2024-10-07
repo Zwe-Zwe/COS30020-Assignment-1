@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['gender'] = $user_gender; // Store gender in the session
 
             // Redirect to the main page (or any other page like dashboard)
-            header("Location: index.php");
+            header("Location: main_menu.php");
             exit;
         }
     }
@@ -85,16 +85,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <!-- Submit Button -->
-            <div class="row p-3">
+            <div class="row mb-3 p-3">
                 <div class="col d-flex justify-content-center">
                     <input type="submit" class="btn btn-primary rounded-0 d-flex custom-btn" value="Login">
                 </div>
             </div>
 
             <!-- Registration Link -->
-            <div class="row mb-3 p-3">
+            <div class="row">
                 <div class="col d-flex justify-content-center">
                     <p>Don't have an account? <a class="login-a" href="registration.php">Register</a></p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col d-flex justify-content-center">
+                    <p><a class="login-a" href="forget_password.php">Forgot the password?</a></p>
                 </div>
             </div>
         </form>

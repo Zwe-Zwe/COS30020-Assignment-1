@@ -14,13 +14,13 @@
         </div>
         <div class="row px-0 pb-3">
             <div class="col-md-4 d-flex justify-content-start">
-                <p>GEORGE NAKASHIMA WOODWORKERS</p>
+                <p>HERBARIUM FOR PLANT BIODERVISITY</p>
             </div>
             <div class="d-flex col-md-4 justify-content-center">
                 <img src="img/logo-alter.png" class="img-fluid" id="footer-img">
             </div>
             <div class="col-md-4 d-flex justify-content-end">
-                <p>PRIVACY POLICY|© 2016 - 2024|SITE CREDITS</p>
+                <p>ABOUT |© 2024| SITE CREDITS</p>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav');
     const defaultLogo = document.getElementById('default-logo');
     const scrolledLogo = document.getElementById('scrolled-logo');
+    const userContent = document.querySelectorAll('.user-content');
 
     // Get the current path
     const currentPath = window.location.pathname;
@@ -18,6 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 nav.style.color = 'rgba(74, 74, 74, 1)';
                 defaultLogo.style.display = 'none';
                 scrolledLogo.style.display = 'block';
+                userContent.forEach(function(element) {
+                    element.style.backgroundColor = 'transparent';
+                });
+
             } else {
                 nav.style.color = 'rgba(242, 242, 240, 1)';
                 nav.style.backgroundColor = 'transparent';
@@ -32,6 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
             nav.style.color = 'rgba(74, 74, 74, 1)';
             defaultLogo.style.display = 'none';
             scrolledLogo.style.display = 'block';
+            userIcon.style.backgroundColor = 'transparent';
+            userContent.forEach(function(element) {
+                element.style.backgroundColor = 'transparent';
+            });
+
         } else {
             nav.style.color = 'rgba(242, 242, 240, 1)';
             nav.style.backgroundColor = 'transparent';
@@ -42,6 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Apply static navbar design for other pages
         nav.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
         nav.style.color = 'rgba(74, 74, 74, 1)';
+        userContent.forEach(function(element) {
+            element.style.backgroundColor = 'transparent';
+        });
 
         if (defaultLogo && scrolledLogo) {
             // Show scrolled logo by default for other pages
@@ -107,6 +120,16 @@ window.addEventListener('scroll', function() {
         image.style.transform = `translateY(${translateYValue}vh)`;
     });
 });
+
+function clearErrors() {
+    // Get all elements with the class 'error-message'
+    const errorMessages = document.querySelectorAll('.error-message');
+
+    // Loop through each error message element and clear its content
+    errorMessages.forEach(function(error) {
+        error.innerText = '';  // Clear the error message
+    });
+}
 
 
 

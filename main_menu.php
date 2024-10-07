@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+
+// Check if user is logged in, if not, redirect to login page
+if (!isset($_SESSION['loggedin'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <?php include_once "head.php" ?>
 <body id="menu-body">
     <?php include_once "header.php" ?>
@@ -83,7 +91,7 @@
                                 <p class="card-text mt-4">This page invites users to contribute to our plant database by uploading photos of fresh leaves or herbarium specimens, along with relevant plant information. Your contribution helps expand the dataset and aids in further research on plant identification and classification. By filling out the form with detailed information about the plant, you provide valuable data for the “Identify” page and other users. All submitted photos and data are reviewed and stored in our database, ensuring that the plant information is accurate and up-to-date for future reference.</p>
                             </div>
                             <div class="d-flex justify-content-center mb-4 mt-4">
-                                <a href="#" class="btn btn-primary rounded-0">Go to Page</a>
+                                <a href="contribute.php" class="btn btn-primary rounded-0">Go to Page</a>
                             </div>
                         </div>
                     </div>
