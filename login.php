@@ -10,51 +10,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
     // Open the user file for reading
-    $file = fopen("user.txt", "r");
+    if (!file_exists("user.txt")) {
+        $error_message = "User file not found.";
+    } else {
+        $file = fopen("user.txt", "r");
 
-    // Flag to track if a user is found
-    $user_found = false;
+        // Flag to track if a user is found
+        $user_found = false;
 
-    // Loop through the file line by line
-    while (($line = fgets($file)) !== false) {
-        // Split the line using '|' as a delimiter
-        $user_data = explode("|", $line);
+        // Loop through the file line by line
+        while (($line = fgets($file)) !== false) {
+            // Split the line using '|' as a delimiter
+            $user_data = explode("|", $line);
 
-        // Extract the user email, password, and gender by parsing the line data
-        $user_email = explode(":", $user_data[4])[1]; // Email is stored in index 4
-        $user_password = explode(":", $user_data[6])[1]; // Password is stored in index 6
-        $user_gender = explode(":", $user_data[3])[1]; // Gender is stored in index 3
+            // Check if the required fields exist
+            if (count($user_data) >= 10) { // Ensure there are enough elements
+                // Extract the user email, password, gender, and profile image by parsing the line data
+                $user_email = explode(":", $user_data[4])[1] ?? ''; // Email is stored in index 4
+                $user_password = explode(":", $user_data[8])[1] ?? ''; // Password is stored in index 8
+                $user_gender = explode(":", $user_data[3])[1] ?? ''; // Gender is stored in index 3
+                $user_profile_image = explode(":", $user_data[9])[1] ?? ''; // Profile image path is stored in index 9
 
-        // Trim whitespace and newlines from email, password, and gender
-        $user_email = trim($user_email);
-        $user_password = trim($user_password);
-        $user_gender = trim($user_gender);
+                // Trim whitespace and newlines from email, password, gender, and profile image
+                $user_email = trim($user_email);
+                $user_password = trim($user_password);
+                $user_gender = trim($user_gender);
+                $user_profile_image = trim($user_profile_image);
 
-        // Check if the provided email and password match
-        if ($email === $user_email && $password === $user_password) {
-            // User found and credentials match
-            $user_found = true;
+                // Check if the provided email and password match
+                if ($email === $user_email && $password === $user_password) {
+                    // User found and credentials match
+                    $user_found = true;
 
-            // Store the email, gender, and logged-in status in session
-            $_SESSION['loggedin'] = true;
-            $_SESSION['email'] = $email;
-            $_SESSION['gender'] = $user_gender; // Store gender in the session
+                    // Store the email, gender, profile image, and logged-in status in session
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['gender'] = $user_gender; // Store gender in the session
+                    $_SESSION['profile_image'] = $user_profile_image; // Store profile image in session
 
-            // Redirect to the main page (or any other page like dashboard)
-            header("Location: main_menu.php");
-            exit;
+                    // Redirect to the main page (or any other page like dashboard)
+                    header("Location: main_menu.php");
+                    exit;
+                }
+            }
+        }
+
+        // Close the file after reading
+        fclose($file);
+
+        // If no user was found, set an error message
+        if (!$user_found) {
+            $error_message = "Invalid email or password!";
         }
     }
-
-    // Close the file after reading
-    fclose($file);
-
-    // If no user was found, set an error message
-    if (!$user_found) {
-        $error_message = "Invalid email or password!";
-    }
 }
-
 ?>
 
 <!-- HTML section of the login page -->
@@ -67,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Display error message if login failed -->
             <?php if (!empty($error_message)) : ?>
-                <div style="color:red; text-align:center;"><?php echo htmlspecialchars($error_message); ?></div>
+                <div style="color:red; text-align:center;"><?= htmlspecialchars($error_message); ?></div>
             <?php endif; ?>
 
             <!-- Email Input Field -->

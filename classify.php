@@ -1,12 +1,20 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+
+// Check if user is logged in, if not, redirect to login page
+if (!isset($_SESSION['loggedin'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <?php include_once "head.php" ?>
-<body>
+<body class="classify-body">
     <?php include_once "header.php" ?>
     <div class="container classify-container">
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <!-- Plant Classification Header -->
-                <div class="classification-header text-center mb-4">
+                <div class="classification-header text-center mb-5">
                     <h2>Plant Classification</h2>
                 </div>
 
@@ -45,7 +53,7 @@
                 <!-- Card: Classification Hierarchy Image -->
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="img/Plants Classification.jpg" alt="Plant Classification Hierarchy" class="img-fluid mb-3">
+                        <img src="img/Plants Classification.jpg" alt="Plant Classification Hierarchy" class="img-fluid classify-img mb-3">
                         <p class="card-text">Figure: Hierarchy of Plant Classification from Family to Species</p>
                     </div>
                 </div>
@@ -65,11 +73,15 @@
                         <p class="card-text">The Dipterocarpaceae family consists of tropical trees that are primarily found in Southeast Asia. These trees are known for their timber and resin.</p>
                     </div>
                     <!-- Example Images for Family -->
-                    <div class="card-body text-center">
-                        <img src="img/family_image1.jpg" alt="Family Example 1" class="img-fluid mb-3">
-                        <p class="card-text">Figure 1: An example of the Dipterocarpaceae family</p>
-                        <img src="img/family_image2.jpg" alt="Family Example 2" class="img-fluid mb-3">
-                        <p class="card-text">Figure 2: Another example of the Dipterocarpaceae family</p>
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                            <img src="img/family1.jpeg" alt="Monotes kerstingii" class="img-fluid classify-img mb-3">
+                            <p class="card-text mb-3">Figure: Monotes kerstingii</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="img/family2.jpg" alt="Sal" class="img-fluid classify-img mb-3">
+                            <p class="card-text mb-3">Figure: Sal</p>
+                        </div>
                     </div>
                 </div>
 
@@ -80,11 +92,15 @@
                         <p class="card-text">The genus <em>Dipterocarpus</em> includes large trees that produce two-winged fruits. These trees are commonly found in rainforests and contribute significantly to forest ecology.</p>
                     </div>
                     <!-- Example Images for Genus -->
-                    <div class="card-body text-center">
-                        <img src="img/genus_image1.jpg" alt="Genus Example 1" class="img-fluid mb-3">
-                        <p class="card-text">Figure 1: An example of the Dipterocarpus genus</p>
-                        <img src="img/genus_image2.jpg" alt="Genus Example 2" class="img-fluid mb-3">
-                        <p class="card-text">Figure 2: Another example of the Dipterocarpus genus</p>
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                            <img src="img/genus1.jpeg" alt="Dipterocarpus crinitus" class="img-fluid classify-img mb-3">
+                            <p class="card-text mb-3">Figure: Dipterocarpus crinitus</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="img/genus2.jpeg" alt="Dipterocarpus palembanicus" class="img-fluid classify-img mb-3">  
+                            <p class="card-text mb-3">Figure: Dipterocarpus palembanicus</p>                         
+                        </div>
                     </div>
                 </div>
 
@@ -95,11 +111,15 @@
                         <p class="card-text"><em>Dipterocarpus confertus</em> is a species native to tropical rainforests. It is known for its durable timber and plays a role in maintaining forest canopy structures.</p>
                     </div>
                     <!-- Example Images for Species -->
-                    <div class="card-body text-center">
-                        <img src="img/species_image1.jpg" alt="Species Example 1" class="img-fluid mb-3">
-                        <p class="card-text">Figure 1: A photograph of <em>Dipterocarpus confertus</em></p>
-                        <img src="img/species_image2.jpg" alt="Species Example 2" class="img-fluid mb-3">
-                        <p class="card-text">Figure 2: Another example of a <em>Dipterocarpus</em> species</p>
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                            <img src="img/species1.jpeg" alt="Dipterocarpus confertus" class="img-fluid classify-img mb-3">
+                            <p class="card-text mb-3">Figure: Dipterocarpus confertus</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="img/species2.jpeg" alt="Dipterocarpus confertus" class="img-fluid classify-img mb-3">
+                            <p class="card-text mb-3">Figure: Dipterocarpus confertus</p>
+                        </div>
                     </div>
                 </div>
 
@@ -111,6 +131,7 @@
                         <ul>
                             <li><a href="https://www.sciencedirect.com/science/article/pii/S0925231221014934" target="_blank">Science Direct: Plant Classification Study</a></li>
                             <li><a href="https://www.americanmeadows.com/content/general-guides/plant-classification?srsltid=AfmBOoovhnywl-QVkIywNQ3jeJ5UmmNwn2mpk_Sdn-yYzJHIiDrHR4Ag" target="_blank">American Meadows: Plant Classification Guide</a></li>
+                            <li><a href="https://www.inaturalist.org/taxa/47126-Plantae" target="_blank">iNaturalist</a></li>
                         </ul>
                     </div>
                 </div>

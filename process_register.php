@@ -40,6 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender = isset($_POST["gender"]) ? $_POST["gender"] : '';
     $email = isset($_POST["email"]) ? trim($_POST["email"]) : '';
     $home_town = isset($_POST["home_town"]) ? trim($_POST["home_town"]) : '';
+    $phone_number = isset($_POST["phone_number"]) ? trim($_POST["phone_number"]) : '';
+    $student_id = isset($_POST["student_id"]) ? trim($_POST["student_id"]) : '';
     $password = isset($_POST["password"]) ? $_POST["password"] : '';
     $confirm_password = isset($_POST["confirm_password"]) ? $_POST["confirm_password"] : '';
 
@@ -65,6 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($home_town)) {
         $errors['home_town'] = "Home town cannot be empty.";
+    }
+
+    if (empty($phone_number)) {
+        $errors['phone_number'] = "Phone number cannot be empty.";
+    }
+
+    if (empty($student_id)) {
+        $errors['student_id'] = "Student ID cannot be empty.";
     }
 
     if (empty($password)) {
@@ -94,6 +104,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['email'] = "This email is already registered.";
     }
 
+    // Validate phone number (add your own criteria here if necessary)
+    if (!empty($phone_number) && !preg_match("/^[0-9]{7,15}$/", $phone_number)) {
+        $errors['phone_number'] = "Phone number must be between 7 and 15 digits.";
+    }
+
     // Validate password complexity if not empty
     if (!empty($password) && !validatePassword($password)) {
         $errors['password'] = "Password must be at least 8 characters long and include 1 number and 1 symbol.";
@@ -104,11 +119,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['confirm_password'] = "Password and Confirm Password do not match.";
     }
 
-
     // If there are no errors, save the data to the file
     if (empty($errors)) {
+        // Assign profile image based on gender
+        if ($gender === 'Male') {
+            $profile_img = 'boys.jpg';
+        } 
+        if ($gender === 'Female') {
+            $profile_img = 'girl.png';
+        } 
+
         // Format the user record
-        $user_data = "First Name:$first_name|Last Name:$last_name|DOB:$dob|Gender:$gender|Email:$email|Hometown:$home_town|Password:$password\n";
+        $user_data = "First Name:$first_name|Last Name:$last_name|DOB:$dob|Gender:$gender|Email:$email|Hometown:$home_town|Phone Number:$phone_number|Student ID:$student_id|Password:$password|Profile Image:$profile_img\n";
 
         // Save the data into the text file
         file_put_contents($file, $user_data, FILE_APPEND);
@@ -125,5 +147,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
-
 ?>

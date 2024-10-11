@@ -33,6 +33,7 @@ unset($_SESSION['form_data']);
                     <?php if (isset($errors['last_name'])): ?>
                         <p class="error-message"><?= htmlspecialchars($errors['last_name']) ?></p>
                     <?php endif; ?>
+                </div>
             </div>
             <div class="row mb-3 p-3">
                 <div class="col-md-6 mb-3 input-container">
@@ -47,7 +48,7 @@ unset($_SESSION['form_data']);
                     <label class="form-check-label" for="male">Male</label>
                     <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?= (isset($form_data['gender']) && $form_data['gender'] === 'Male') ? 'checked' : '' ?>>
                     <label class="form-check-label" for="female">Female</label>
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?= (isset($form_data['gender']) && $form_data['gender'] === 'Female') ? 'checked' : '' ?>>
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?= (isset($form_data['gender']) && $form_data['gender'] === 'Female') ? 'checked' : 'checked' ?>>
                     <?php if (isset($errors['gender'])): ?>
                         <p class="error-message"><?= htmlspecialchars($errors['gender']) ?></p>
                     <?php endif; ?>
@@ -64,6 +65,20 @@ unset($_SESSION['form_data']);
                     <input type="text" name="home_town" id="home-town" class="custom-input" placeholder="Home Town" value="<?= htmlspecialchars($form_data['home_town'] ?? '') ?>">
                     <?php if (isset($errors['home_town'])): ?>
                         <p class="error-message"><?= htmlspecialchars($errors['home_town']) ?></p>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="row mb-3 p-3">
+                <div class="col-md-6 mb-3 input-container">
+                    <input type="text" name="phone_number" id="phone-number" class="custom-input" placeholder="Phone Number" value="<?= htmlspecialchars($form_data['phone_number'] ?? '') ?>">
+                    <?php if (isset($errors['phone_number'])): ?>
+                        <p class="error-message"><?= htmlspecialchars($errors['phone_number']) ?></p>
+                    <?php endif; ?>
+                </div>
+                <div class="col-md-6 input-container">
+                    <input type="text" name="student_id" id="student-id" class="custom-input" placeholder="Student ID" value="<?= htmlspecialchars($form_data['student_id'] ?? '') ?>">
+                    <?php if (isset($errors['student_id'])): ?>
+                        <p class="error-message"><?= htmlspecialchars($errors['student_id']) ?></p>
                     <?php endif; ?>
                 </div>
             </div>

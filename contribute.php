@@ -1,6 +1,12 @@
-<?php
-// Start the session
+<?php 
 session_start();
+
+// Check if user is logged in, if not, redirect to login page
+if (!isset($_SESSION['loggedin'])) {
+    header("Location: login.php");
+    exit();
+}
+
 
 // Initialize variables to store form data and errors
 $scientific_name = $common_name = $family = $genus = $species = $description = $uploaded_file_name = "";

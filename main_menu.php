@@ -47,7 +47,7 @@ if (!isset($_SESSION['loggedin'])) {
                                 <p class="card-text mt-4">This tutorial provides step-by-step instructions on how to transfer a fresh leaf into herbarium specimens, an essential practice for botanical research and conservation. Learn about the tools you need, from plant presses to archival paper, as well as the proper techniques to preserve the specimens for long-term study. Additionally, discover how to maintain a herbarium, ensuring that your collected specimens remain in pristine condition for scientific reference and educational purposes. Master these techniques to contribute valuable data to plant research and taxonomy efforts.</p>
                             </div>
                             <div class="d-flex justify-content-center mb-4 mt-4">
-                                <a href="#" class="btn btn-primary rounded-0">Go to Page</a>
+                                <a href="tutorial.php" class="btn btn-primary rounded-0">Go to Page</a>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,4 @@
-First Name:Admin|Last Name:|DOB:|Gender:Female|Email:admin@mail.com|Hometown:a|Password:admin
-First Name:hyhy|Last Name:hy|DOB:2024-09-12|Gender:Male|Email:hyhy@gmail.com|Hometown:Monywa|Password:Hy1234567@
-First Name:Zwe|Last Name:Zaw|DOB:2024-09-05|Gender:Male|Email:zwehtetzaw777@gmail.com|Hometown:Monywa|password:ZhZ1224@
-First Name:hy|Last Name:hy|DOB:2024-10-12|Gender:Male|Email:hyhy1@gmail.com|Hometown:Monywa|Password:Hyhy12345@
-First Name:Hy|Last Name:Hy|DOB:2024-10-16|Gender:Male|Email:102783659@students.swinbunre.edu.my|Hometown:Monywa|Password:ZhZ1224348594@
+First Name:Zwe Htet|Last Name:Zaw|DOB:2003-06-11|Gender:Male|Email:102783659@students.swinbunre.edu.my|Hometown:Monywa|Phone Number:01153048339|Student ID:102783659|Password:ZhZ1224@|Profile Image:boys.jpg
+First Name:Zwe Htet|Last Name:Zaw|DOB:2024-10-10|Gender:Female|Email:zwehtetzaw777@gmail.com|Hometown:Monywa|Phone Number:09961065713|Student ID:102783343|Password:ZhZ1224@|Profile Image:girl.png
+
+
