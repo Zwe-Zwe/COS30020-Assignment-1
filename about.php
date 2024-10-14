@@ -1,6 +1,8 @@
-<?php include 'head.php' ?>
+<?php
+session_start();
+include_once 'head.php' ?>
 <body>
-    <?php include 'header.php' ?>
+    <?php include_once 'header.php' ?>
     <div class="container about-container">
         <h2 class="d-flex justify-content-center mb-5">About This Web Application</h2>
         <table class="table table-bordered mb-5">

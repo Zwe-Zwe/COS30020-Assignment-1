@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin'])) {
     <div class="container mt-4 mb-4 tutorial-container">
         <!-- Top Image -->
         <div class="text-center mb-5 tutorial-top-container">
-            <img src="img/specimen.jpg" alt="Herbarium Specimen" class="img-fluid rounded shadow tutorial-top-img">
+            <img src="img/tutorials/specimen.jpg" alt="Herbarium Specimen" class="img-fluid rounded shadow tutorial-top-img">
         </div>
 
         <h2 class="text-center mb-5">How to Make Herbarium Specimens</h2>
@@ -35,7 +35,7 @@ if (!isset($_SESSION['loggedin'])) {
                     </p>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src="img/What To Collect.jpeg" alt="Collecting Plants" class="img-fluid rounded shadow">
+                    <img src="img/tutorials/What To Collect.jpeg" alt="Collecting Plants" class="img-fluid rounded shadow">
                 </div>
             </div>
         </section>
@@ -44,7 +44,7 @@ if (!isset($_SESSION['loggedin'])) {
         <section id="preparation" class="mt-5 mb-5">
             <div class="row mb-5">
                 <div class="col-md-6 text-center">
-                    <img src="img/arranging the specimens.jpeg" alt="Preparing Plants" class="img-fluid rounded shadow">
+                    <img src="img/tutorials/arranging the specimens.jpeg" alt="Preparing Plants" class="img-fluid rounded shadow">
                 </div>
                 <div class="col-md-6">
                     <h3 class="mb-4 tutorial-title">Step 2: Preparation</h3>
@@ -72,7 +72,7 @@ if (!isset($_SESSION['loggedin'])) {
                     </p>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src="img/pressing the specimens.jpeg" alt="Pressing Plants" class="img-fluid rounded shadow">
+                    <img src="img/tutorials/pressing the specimens.jpeg" alt="Pressing Plants" class="img-fluid rounded shadow">
                 </div>
             </div>
         </section>
@@ -81,7 +81,7 @@ if (!isset($_SESSION['loggedin'])) {
         <section id="mounting" class="mt-5 mb-5">
             <div class="row mb-5">
                 <div class="col-md-6 text-center">
-                    <img src="img/mounting the specimens.jpeg" alt="Mounting Plants" class="img-fluid rounded shadow">
+                    <img src="img/tutorials/mounting the specimens.jpeg" alt="Mounting Plants" class="img-fluid rounded shadow">
                 </div>
                 <div class="col-md-6">
                     <h3 class="mb-4 tutorial-title">Step 4: Mounting</h3>
@@ -102,7 +102,7 @@ if (!isset($_SESSION['loggedin'])) {
                     </p>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src="img/freezing the specimens.jpeg" alt="Freezing Specimens" class="img-fluid rounded shadow">
+                    <img src="img/tutorials/freezing the specimens.jpeg" alt="Freezing Specimens" class="img-fluid rounded shadow">
                 </div>
             </div>
         </section>
@@ -111,7 +111,7 @@ if (!isset($_SESSION['loggedin'])) {
         <section id="identification" class="mt-5 mb-5">
             <div class="row mb-5">
                 <div class="col-md-6 text-center">
-                    <img src="img/identifying the specimens.jpeg" alt="Identifying Plants" class="img-fluid rounded shadow">
+                    <img src="img/tutorials/identifying the specimens.jpeg" alt="Identifying Plants" class="img-fluid rounded shadow">
                 </div>
                 <div class="col-md-6">
                     <h3 class="mb-4 tutorial-title">Step 6: Identification</h3>
@@ -132,7 +132,7 @@ if (!isset($_SESSION['loggedin'])) {
                     </p>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src="img/preserving the specimens.jpeg" alt="Cataloging Specimens" class="img-fluid rounded shadow">
+                    <img src="img/tutorials/preserving the specimens.jpeg" alt="Cataloging Specimens" class="img-fluid rounded shadow">
                 </div>
             </div>
         </section>

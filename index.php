@@ -60,42 +60,40 @@
                 </div>
             </div>
         </div>
-        <div class="p-5 index-card-container">
-            <div class="row mt-5">
-                <div class="col-sm-4 mb-4">
-                    <div class="card shadow-sm rounded-0 border-0 h-100 index-card">
-                        <img src="img/Bidens-andicola.jpeg" alt="Bidens andicola" class="card-img-top rounded-0 img-fluid">
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-4">
-                    <div class="card shadow-sm rounded-0 border-0 h-100 index-card">
-                        <img src="img/Yellow-Moosedung-Moss.jpeg" alt="Yellow Moosedung Moss" class="card-img-top rounded-0 img-fluid">
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-4">
-                    <div class="card shadow-sm rounded-0 border-0 h-100 index-card">
-                        <img src="img/Aztekium valdezii.jpeg" alt="Aztekium valdezii" class="card-img-top rounded-0 img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 mb-4">
-                    <div class="card shadow-sm rounded-0 border-0 h-100 index-card">
-                        <img src="img/Crescent-cup Liverwort.jpeg" alt="rescent-cup Liverwort" class="card-img-top rounded-0 img-fluid">
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-4">
-                    <div class="card shadow-sm rounded-0 border-0 h-100 index-card">
-                        <img src="img/Pancheria ouaiemensis.jpeg" alt="Pancheria ouaiemensis" class="card-img-top rounded-0 img-fluid">
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-4">
-                    <div class="card shadow-sm rounded-0 border-0 h-100 index-card">
-                        <img src="img/Kogelberg Pagoda.jpeg" alt="Kogelberg Pagoda" class="card-img-top rounded-0 img-fluid">
-                    </div>
+        <section class="py-12 mb-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Herbarium Specimens</h2>
+                <div class="row justify-content-center">
+                    <?php
+                    // Get all images from the 'img/plants' directory
+                    $images = glob("img/plants/*.{jpg,jpeg,png}", GLOB_BRACE);
+
+                    // Check if there are any images
+                    if (!empty($images)) {
+                        // Shuffle the images to randomize
+                        shuffle($images);
+                        
+                        // Select the first 6 random images
+                        $random_images = array_slice($images, 0, 6);
+
+                        // Loop through the selected images and display them
+                        foreach ($random_images as $image) {
+                            $image_name = basename($image); // Get the image file name
+
+                            echo "<div class='col-6 col-md-6 col-lg-4 p-3 d-flex justify-content-center'>";
+                            echo "<img src='{$image}' alt='{$image_name}' class='img-fluid rounded shadow herbarium-img' />";
+                            echo "</div>";
+                        }
+                    } else {
+                        // If no images found
+                        echo "<p class='text-center'>No herbarium specimens available at the moment. Please check back later.</p>";
+                    }
+                    ?>
                 </div>
             </div>
-        </div>   
+        </section>
+
+
     </article>
 <?php include_once "footer.php" ?>
 </body>

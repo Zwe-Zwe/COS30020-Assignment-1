@@ -69,7 +69,7 @@ if (!isset($_SESSION['loggedin'])) {
                                 <p class="card-text mt-4">This page allows users to identify a plant based on the uploaded photo. With advanced image recognition technology, the system will analyze the plant photo and provide key information, including the scientific plant name, common name, and images of similar herbarium specimens. The identification process is simple, allowing you to quickly classify plants from your own surroundings. Additionally, you can download a detailed description of the plant in PDF format for future reference, making it easy to share and study the species you encounter.</p>
                             </div>
                             <div class="d-flex justify-content-center mb-4 mt-4">
-                                <a href="#" class="btn btn-primary rounded-0">Go to Page</a>
+                                <a href="identify.php" class="btn btn-primary rounded-0">Go to Page</a>
                             </div>
                         </div>
                     </div>

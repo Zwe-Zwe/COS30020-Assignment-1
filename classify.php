@@ -75,11 +75,11 @@ if (!isset($_SESSION['loggedin'])) {
                     <!-- Example Images for Family -->
                     <div class="row text-center">
                         <div class="col-md-6">
-                            <img src="img/family1.jpeg" alt="Monotes kerstingii" class="img-fluid classify-img mb-3">
+                            <img src="img/plants/family1.jpeg" alt="Monotes kerstingii" class="img-fluid classify-img mb-3">
                             <p class="card-text mb-3">Figure: Monotes kerstingii</p>
                         </div>
                         <div class="col-md-6">
-                            <img src="img/family2.jpg" alt="Sal" class="img-fluid classify-img mb-3">
+                            <img src="img/plants/family2.jpg" alt="Sal" class="img-fluid classify-img mb-3">
                             <p class="card-text mb-3">Figure: Sal</p>
                         </div>
                     </div>
@@ -94,11 +94,11 @@ if (!isset($_SESSION['loggedin'])) {
                     <!-- Example Images for Genus -->
                     <div class="row text-center">
                         <div class="col-md-6">
-                            <img src="img/genus1.jpeg" alt="Dipterocarpus crinitus" class="img-fluid classify-img mb-3">
+                            <img src="img/plants/genus1.jpeg" alt="Dipterocarpus crinitus" class="img-fluid classify-img mb-3">
                             <p class="card-text mb-3">Figure: Dipterocarpus crinitus</p>
                         </div>
                         <div class="col-md-6">
-                            <img src="img/genus2.jpeg" alt="Dipterocarpus palembanicus" class="img-fluid classify-img mb-3">  
+                            <img src="img/plants/genus2.jpeg" alt="Dipterocarpus palembanicus" class="img-fluid classify-img mb-3">  
                             <p class="card-text mb-3">Figure: Dipterocarpus palembanicus</p>                         
                         </div>
                     </div>
@@ -113,11 +113,11 @@ if (!isset($_SESSION['loggedin'])) {
                     <!-- Example Images for Species -->
                     <div class="row text-center">
                         <div class="col-md-6">
-                            <img src="img/species1.jpeg" alt="Dipterocarpus confertus" class="img-fluid classify-img mb-3">
+                            <img src="img/plants/species1.jpeg" alt="Dipterocarpus confertus" class="img-fluid classify-img mb-3">
                             <p class="card-text mb-3">Figure: Dipterocarpus confertus</p>
                         </div>
                         <div class="col-md-6">
-                            <img src="img/species2.jpeg" alt="Dipterocarpus confertus" class="img-fluid classify-img mb-3">
+                            <img src="img/plants/species2.jpeg" alt="Dipterocarpus confertus" class="img-fluid classify-img mb-3">
                             <p class="card-text mb-3">Figure: Dipterocarpus confertus</p>
                         </div>
                     </div>

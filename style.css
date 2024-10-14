@@ -136,8 +136,8 @@ nav {
 }
 
 .nav-icon {
-    width: 2vw;        /* Adjust this value based on your layout */
-    height: 2vw;       /* Make the height the same as the width for a perfect circle */
+    width: 40px;        /* Adjust this value based on your layout */
+    height: 40px;       /* Make the height the same as the width for a perfect circle */
     padding-left: 0;     /* Removed padding to ensure the image remains centered */
     border-radius: 50%;  /* This makes the image circular */
     object-fit: cover;   /* Ensures the image covers the entire area without distortion */
@@ -378,35 +378,19 @@ nav {
     margin-top: 10vh;
 }
 
-
-
-/* Index Cards */
-.index-card-container{
-    width: 100vw;
-    height: 120vh;
-    background-image: url(img/Waterfall\ Fountainbush.jpg);
-    background-size: cover; /* Adjust to fit the container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* No repeating */
-    overflow-x: hidden; 
-}
-
-.index-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.index-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.index-card img{
+.herbarium-img {
+    width: 350px;
+    aspect-ratio: 1;
     object-fit: cover;
-    width: 100%;
-    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    border-radius: 10px;
 }
-
-
+.herbarium-img:hover {
+    /* Slightly enlarge the image */
+    transform: scale(1.05);
+    transition: all 1s ease;
+    cursor: pointer;
+}
 /* Main Menu Page */
 
 #menu-body{
@@ -583,8 +567,9 @@ footer p{
 }
 
 .classify-img {
-    width: 20vw; /* Make sure the images are responsive */
-    object-fit: cover; /* Crop the image to fit the box */
+    width: 40%;
+    height: 40vh;
+    object-fit: cover !important;
 }
 
 
@@ -670,6 +655,50 @@ h5.classify-titles {
 .text-justify {
     text-align: justify; /* Justify text for declaration */
 }
+
+/* Contribute Page */ 
+
+.contribute-button{
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+}
+
+.modal-content {
+    border: none; /* Remove border */
+    border-radius: 0; /* Remove border radius */
+    background-color: #F2F2F0; /* Optional: Set background color */
+}
+
+.modal-header, .modal-body, .modal-footer {
+    border: none; /* Remove border from header, body, and footer */
+}
+
+.contribute-card-img{
+    width: 100%;
+    height: 40vh;
+    object-fit: cover !important;
+}
+
+/* Plant Detail Page */
+
+.detail-container{
+    margin-top: 12vh;
+    width: 40vw !important;
+}
+
+/* Identify Page */
+
+
+.upload-container {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+
 
 /* About Page */
 

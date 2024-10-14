@@ -1,0 +1,6 @@
+Dipterocarpus intricatus|Tenggek Burung|Dipterocarpaceae|Dipterocarpus
+Dipterocarpus zeylanicus|Sri Lankan Sandalwood|Dipterocarpaceae|Dipterocarpus
+Dipterocarpus cornutus|Horned Tree|Dipterocarpaceae|Dipterocarpus
+Dipterocarpus alatus|Malay Donan|Dipterocarpaceae|Dipterocarpus
+Dipterocarpus indicus|Indian Mahogany|Dipterocarpaceae|Dipterocarpus
+Dipterocarpus obtusifolius|Oblong-leaved Dipterocarp|Dipterocarpaceae|Dipterocarpus

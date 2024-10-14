@@ -6,194 +6,88 @@ if (!isset($_SESSION['loggedin'])) {
     header("Location: login.php");
     exit();
 }
+?>
+<?php include_once 'head.php' ?>
+<body>
+<?php include_once 'header.php' ?>
+<!-- Contribute Button -->
+<div class="container contribute-button d-flex align-items-center">
+    <h1 class="me-3">Contributions:</h1>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#contributeModal">
+        Contribute
+    </button>
+</div>
 
+ 
 
-// Initialize variables to store form data and errors
-$scientific_name = $common_name = $family = $genus = $species = $description = $uploaded_file_name = "";
-$errors = [];
+<!-- Contribute Modal -->
+<div class="modal fade" id="contributeModal" tabindex="-1" aria-labelledby="contributeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="contributeModalLabel">Contribute</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="submit_contribution.php" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="scientificName" class="form-label">Scientific Name (Species) <span class="text-danger">*</span></label>
+            <input type="text" class="custom-input" id="scientificName" name="scientific_name" placeholder="e.g. Dipterocarpus bourdillonii" required>
+          </div>
+          <div class="mb-3">
+            <label for="commonName" class="form-label">Common Name</label>
+            <input type="text" class="custom-input" id="commonName" name="common_name" placeholder="e.g. Chiratta anjili">
+          </div>
+          <div class="mb-3">
+            <label for="family" class="form-label">Family <span class="text-danger">*</span></label>
+            <input type="text" class="custom-input" id="family" name="family" placeholder="e.g. Dipterocarpaceae" required>
+          </div>
+          <div class="mb-3">
+            <label for="genus" class="form-label">Genus <span class="text-danger">*</span></label>
+            <input type="text" class="custom-input" id="genus" name="genus" placeholder="e.g. Dipterocarpus" required>
+          </div>
+          <div class="mb-3">
+            <label for="herbariumPhoto" class="form-label">Herbarium Photo <span class="text-danger">*</span></label>
+            <input type="file" class="custom-input" id="herbariumPhoto" name="herbarium_photo" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate scientific name
-    if (empty($_POST["scientific_name"])) {
-        $errors['scientific_name'] = "Scientific name is required.";
-    } else {
-        $scientific_name = sanitize_input($_POST["scientific_name"]);
-    }
+<div class="container">
+    <div class="row">
+        <?php
+        // Check if contribute.txt exists and read the data
+        $filename = 'data/contribute.txt';
+        if (file_exists($filename)) {
+            $file_contents = file($filename);
+            // Display each contribution as a card
+            foreach ($file_contents as $line) {
+                list($scientific_name, $common_name, $family, $genus) = explode('|', trim($line));
 
-    // Validate common name
-    if (empty($_POST["common_name"])) {
-        $errors['common_name'] = "Common name is required.";
-    } else {
-        $common_name = sanitize_input($_POST["common_name"]);
-    }
-
-    // Validate family (starts with capital letter, ends with -aceae)
-    if (empty($_POST["family"])) {
-        $errors['family'] = "Family is required.";
-    } elseif (!preg_match("/^[A-Z][a-zA-Z]*aceae$/", $_POST["family"])) {
-        $errors['family'] = "Family must start with a capital letter and end with '-aceae'.";
-    } else {
-        $family = sanitize_input($_POST["family"]);
-    }
-
-    // Validate genus (starts with capital letter, only alphabetic)
-    if (empty($_POST["genus"])) {
-        $errors['genus'] = "Genus is required.";
-    } elseif (!preg_match("/^[A-Z][a-zA-Z]*$/", $_POST["genus"])) {
-        $errors['genus'] = "Genus must start with a capital letter and contain only alphabetic characters.";
-    } else {
-        $genus = sanitize_input($_POST["genus"]);
-    }
-
-    // Validate species (lowercase and alphabetic)
-    if (empty($_POST["species"])) {
-        $errors['species'] = "Species is required.";
-    } elseif (!preg_match("/^[a-z]+$/", $_POST["species"])) {
-        $errors['species'] = "Species must contain only lowercase alphabetic characters.";
-    } else {
-        $species = sanitize_input($_POST["species"]);
-    }
-
-    // Validate description
-    if (empty($_POST["description"])) {
-        $errors['description'] = "Description is required.";
-    } else {
-        $description = sanitize_input($_POST["description"]);
-    }
-
-    // Validate image file upload and move it to the 'img' folder
-    if (empty($_FILES['photo']['name'])) {
-        $errors['photo'] = "Photo is required.";
-    } else {
-        // Handle file upload
-        $target_dir = "img/"; // Ensure this directory exists
-        $target_file = $target_dir . basename($_FILES["photo"]["name"]);
-        $uploaded_file_name = basename($_FILES["photo"]["name"]);
-
-        // Check if the file is a valid image
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $check = getimagesize($_FILES["photo"]["tmp_name"]);
-        if ($check === false) {
-            $errors['photo'] = "The file is not a valid image.";
-        } elseif (file_exists($target_file)) {
-            $errors['photo'] = "Sorry, file already exists.";
-        } elseif ($_FILES["photo"]["size"] > 500000) {
-            $errors['photo'] = "Sorry, your file is too large.";
-        } elseif (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
-            $errors['photo'] = "Only JPG, JPEG, PNG & GIF files are allowed.";
-        } else {
-            // Try to move the uploaded file to the 'img' folder
-            if (!move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
-                $errors['photo'] = "Sorry, there was an error uploading your file.";
+                echo '<div class="col-md-4 mb-4">';
+                echo '    <div class="card">';
+                $image_path = 'img/plants/' . $scientific_name . '.jpg'; // Path to the image
+                echo '        <img src="' . $image_path . '" class="card-img-top contribute-card-img" alt="Herbarium Photo">';
+                echo '        <div class="card-body">';
+                echo '            <h5 class="card-title">' . trim($scientific_name) . '</h5>';
+                echo '            <p class="card-text"><strong>Common Name:</strong> ' . trim($common_name) . '</p>';
+                echo '            <a href="plant_detail.php?scientific_name=' . urlencode($scientific_name) . '" class="btn btn-primary">Learn more</a>';
+                echo '        </div>';
+                echo '    </div>';
+                echo '</div>';
             }
         }
-    }
-
-    // If there are no errors, proceed with form submission
-    if (empty($errors)) {
-        // Open the file in append mode
-        $file = fopen("contribute.txt", "a");
-        if ($file) {
-            // Create a string with the input data
-            $data = "Scientific Name: $scientific_name\n";
-            $data .= "Common Name: $common_name\n";
-            $data .= "Family: $family\n";
-            $data .= "Genus: $genus\n";
-            $data .= "Species: $species\n";
-            $data .= "Description: $description\n";
-            $data .= "Uploaded File: $uploaded_file_name\n";
-            $data .= "---------------------------\n";
-
-            // Write the data to the file
-            fwrite($file, $data);
-            fclose($file);
-            
-            // Optional: You might want to redirect or display a success message here
-        }
-    }
-}
-
-// Function to sanitize user input
-function sanitize_input($data) {
-    return htmlspecialchars(stripslashes(trim($data)));
-}
-?>
-
-<?php include_once 'head.php'; ?>
-<body id="reg-body">
-    <?php include_once 'header.php'; ?>
-    <div class="container d-flex justify-content-center mt-5">
-        <form class="p-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-            <legend class="text-center display-7 mb-3 mt-3">Contribute Your Data</legend>
-            
-            <div class="row mb-3 p-3">
-                <div class="col-md-6 input-container">
-                    <input type="text" class="custom-input" name="scientific_name" placeholder="Scientific Name" value="<?php echo $scientific_name; ?>" >
-                    <?php if (isset($errors['scientific_name'])): ?>
-                        <p class="error-message"><?php echo htmlspecialchars($errors['scientific_name']); ?></p>
-                    <?php endif; ?>
-                </div>
-                <div class="col-md-6 input-container">
-                    <input type="text" class="custom-input" name="common_name" placeholder="Common Name" value="<?php echo $common_name; ?>" >
-                    <?php if (isset($errors['common_name'])): ?>
-                        <p class="error-message"><?php echo htmlspecialchars($errors['common_name']); ?></p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            
-            <div class="row mb-3 p-3">
-                <div class="col-md-6 input-container">
-                    <input type="text" class="custom-input" name="family" placeholder="Family" value="<?php echo $family; ?>" >
-                    <?php if (isset($errors['family'])): ?>
-                        <p class="error-message"><?php echo htmlspecialchars($errors['family']); ?></p>
-                    <?php endif; ?>
-                </div>
-                <div class="col-md-6 input-container">
-                    <input type="text" class="custom-input" name="genus" placeholder="Genus" value="<?php echo $genus; ?>" >
-                    <?php if (isset($errors['genus'])): ?>
-                        <p class="error-message"><?php echo htmlspecialchars($errors['genus']); ?></p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            
-            <div class="row mb-3 p-3">
-                <div class="col-md-6 input-container">
-                    <input type="text" class="custom-input" name="species" placeholder="Species" value="<?php echo $species; ?>" >
-                    <?php if (isset($errors['species'])): ?>
-                        <p class="error-message"><?php echo htmlspecialchars($errors['species']); ?></p>
-                    <?php endif; ?>
-                </div>
-                <div class="col-md-6 mt-3 input-container">
-                    <input type="file" id="photo" name="photo" accept="image/*">
-                    <?php if (!empty($uploaded_file_name)): ?>
-                        <p>Uploaded File: <?php echo htmlspecialchars($uploaded_file_name); ?></p>
-                    <?php endif; ?>
-                    <?php if (isset($errors['photo'])): ?>
-                        <p class="error-message"><?php echo htmlspecialchars($errors['photo']); ?></p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            
-            <div class="row mb-3 p-3">
-                <div class="col input-container">
-                    <textarea name="description" placeholder="Enter plant description here..." ><?php echo $description; ?></textarea>
-                    <?php if (isset($errors['description'])): ?>
-                        <p class="error-message"><?php echo htmlspecialchars($errors['description']); ?></p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            
-            <div class="row mb-3 p-3">
-                <div class="col-md-6 mb-3 d-flex justify-content-center">
-                    <input type="submit" class="btn btn-primary rounded-0 d-flex custom-btn" value="Submit">
-                </div>
-                <div class="col-md-6 mb-3 d-flex justify-content-center">
-                    <input type="reset" class="btn btn-primary rounded-0 d-flex custom-btn" value="Reset" onclick="clearErrors()">
-                </div>
-            </div>
-        </form>
+        ?>
     </div>
-    <?php include_once 'footer.php'; ?>
+</div>
+
+<?php include_once "footer.php" ?>
 </body>
 </html>
