@@ -1,4 +1,5 @@
 <?php
+session_name('Zwe_Het_Zaw');
 session_start();
 
 // Function to validate email format
@@ -30,7 +31,7 @@ function isEmailTaken($email, $file) {
 }
 
 // File path
-$file = 'user.txt';
+$file = 'data/user.txt';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data safely

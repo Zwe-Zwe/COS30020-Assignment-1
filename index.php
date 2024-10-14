@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+session_name('Zwe_Het_Zaw');
+session_start(); 
+?>
+
 <?php include_once "head.php" ?>
 <body id="index-body">
     <?php include_once "header.php" ?>
@@ -9,24 +13,27 @@
         <div class="slide-container">
             <div class="slide">
                 <img src="img/Thismia-mantiqueirensis.jpeg" class="slide-images" alt="Thismia-mantiqueirensis">
-                <!-- <div class="slide-text">
-                    <blockquote>"A herbarium is better than any illustration; every botanist should make one."</blockquote>
-                    <cite>- Carolus Linnaeus </cite>
-                </div> -->
+                <div class="slide-content">
+                    <h1>Welcome To The Herbarium Project</h1>
+                    <a href="login.php" class="btn btn-primary p-2 px-5 index-button">Login</a>
+                    <a href="registration.php" class="btn btn-success p-2 px-5 index-button">Register</a>
+                </div>
             </div>
             <div class="slide">
                 <img src="img/Purple-Alpine-Paintbrush.jpg" class="slide-images" alt="Purple-Alpine-Paintbrush">
-                <!-- <div class="slide-text">
-                    <blockquote>"Botany is the art of identifying and classifying plants, but it is also the art of discovering their uses and understanding their significance."</blockquote>
-                    <cite>- William Turner, early botanist and herbalist.</cite>
-                </div> -->
+                <div class="slide-content">
+                    <h1>Welcome To The Herbarium Project</h1>
+                    <a href="login.php" class="btn btn-primary p-2 px-5 index-button">Login</a>
+                    <a href="registration.php" class="btn btn-success p-2 px-5 index-button">Register</a>
+                </div>
             </div>
             <div class="slide">
                 <img src="img/Nitella-praeclara.jpg" class="slide-images" alt="Nitella-praeclara">
-                <!-- <div class="slide-text">
-                    <blockquote>"A herbarium is better than any illustration; every botanist should make one."</blockquote>
-                    <cite>- Carolus Linnaeus </cite>      
-                </div> -->
+                <div class="slide-content">
+                    <h1>Welcome To The Herbarium Project</h1>
+                    <a href="login.php" class="btn btn-primary p-2 px-5 index-button">Login</a>
+                    <a href="registration.php" class="btn btn-success p-2 px-5 index-button">Register</a>
+                </div>
             </div>
         </div>
         <div class="index-content">
@@ -92,9 +99,8 @@
                 </div>
             </div>
         </section>
-
-
     </article>
+    
 <?php include_once "footer.php" ?>
 </body>
 </html>

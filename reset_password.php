@@ -1,71 +1,79 @@
 <?php
+session_name('Zwe_Het_Zaw');
 session_start();
 $error_message = '';
-$_SESSION['password_reset_success'] = false;
+$success_message = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_password = isset($_POST['new_password']) ? trim($_POST['new_password']) : '';
     $confirm_password = isset($_POST['confirm_password']) ? trim($_POST['confirm_password']) : '';
 
-    if ($new_password === $confirm_password) {
-        // Update the password in the user.txt file
-        $email = $_SESSION['email'];
-        $file = fopen("user.txt", "r+");
-        $updated_content = '';
+    // Check if passwords match
+    if ($new_password !== $confirm_password) {
+        $error_message = "Passwords do not match.";
+    } else {
+        // Get user data from session
+        $user_data = $_SESSION['user_data'] ?? [];
+        $updated_data = [];
 
-        // Loop through the file to update the user's password
-        while (($line = fgets($file)) !== false) {
-            $user_data = explode("|", $line);
-            $user_email = explode(":", $user_data[4])[1];
+        if (count($user_data) > 0) {
+            // Extract the user information
+            $user_email = explode(":", $user_data[4])[1] ?? ''; // Email
             $user_email = trim($user_email);
 
-            if ($email === $user_email) {
-                // Update the password for the user
-                $user_data[6] = "password:" . $new_password;
-                $line = implode("|", $user_data) . "\n";
-            }
-            $updated_content .= $line;
-        }
-        fclose($file);
+            // Read all users and update the password for the current user
+            $file = fopen("data/user.txt", "r");
+            while (($line = fgets($file)) !== false) {
+                $line_data = explode("|", trim($line));
+                $stored_email = explode(":", $line_data[4])[1] ?? ''; // Extract the stored email
+                $stored_email = trim($stored_email);
 
-        // Write the updated content back to the file
-        file_put_contents("user.txt", $updated_content);
-        $_SESSION['password_reset_success'] = true;
-        // Redirect to the login page
-        header("Location: login.php");
-        exit();
-    } else {
-        $error_message = "Passwords do not match!";
+                if ($stored_email === $user_email) {
+                    // Update the password field
+                    $line_data[8] = "Password:$new_password"; // Update the password
+                }
+
+                // Add the line to the updated data
+                $updated_data[] = implode("|", $line_data);
+            }
+            fclose($file);
+
+            // Write the updated data back to the user.txt file
+            $file = fopen("data/user.txt", "w");
+            foreach ($updated_data as $line) {
+                fwrite($file, $line . PHP_EOL);
+            }
+            fclose($file);
+
+            // Clear session data
+            session_destroy();
+
+            // Redirect to the login page with a success message
+            header("Location: login.php?message=Password updated successfully.");
+            exit();
+        } else {
+            $error_message = "Session expired or user not found.";
+        }
     }
 }
 ?>
-
-<?php include_once 'head.php' ?>
+<?php include_once "head.php"; ?>
 <body id="reg-body">
-    <div class="container d-flex justify-content-center" id="login-container">
-        <?php include_once "header.php"; ?>
-        <form id="login-form" method="POST" action="reset_password.php">
+    <?php include_once "header.php"; ?>
+    <div class="container d-flex justify-content-center" id="forgetPassword">
+        <form method="POST" action="reset_password.php" id="login-form">
             <legend class="text-center display-7 ml-3 mb-3 mt-3">Reset Password</legend>
-
-            <?php if (isset($_SESSION['password_reset_success']) && $_SESSION['password_reset_success'] === true): ?>
-                <div class="alert alert-success">
-                    Password Resetting successful! Redirecting to login page...
-                </div>
-                <meta http-equiv="refresh" content="3;url=login.php">
-                <?php unset($_SESSION['password_reset_success']); ?>
-            <?php endif; ?>
-
             <?php if (!empty($error_message)) : ?>
                 <div style="color:red;"><?php echo htmlspecialchars($error_message); ?></div>
             <?php endif; ?>
-
             <div class="row mb-3 p-3">
                 <div class="col">
-                    <input type="password" name="new_password" class="custom-input" placeholder="New Password" required>
+                    <input type="password" name="new_password" class="custom-input" placeholder="Enter new password" required>
                 </div>
             </div>
             <div class="row mb-3 p-3">
                 <div class="col">
-                    <input type="password" name="confirm_password" class="custom-input" placeholder="Confirm Password" required>
+                    <input type="password" name="confirm_password" class="custom-input" placeholder="Confirm new password" required>
                 </div>
             </div>
             <div class="row mb-3 p-3">
@@ -74,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
         </form>
-    </div> 
-    <script src="script.js"></script>   
+    </div>
+    <?php include_once 'footer.php' ?>
 </body>
 </html>

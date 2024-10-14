@@ -1,4 +1,5 @@
 <?php 
+session_name('Zwe_Het_Zaw');
 session_start();
 
 // Check if user is logged in, if not, redirect to login page
@@ -12,7 +13,7 @@ if (!isset($_SESSION['loggedin'])) {
     <?php include_once "header.php" ?>
     <div class="container" id="card-container">
         <!-- Plants Classification -->
-        <div class="row mt-5" id="card-row">
+        <div class="row card-row mt-5">
             <div class="col-12">
                 <div class="card rounded-0 border-0">
                     <div class="row">
@@ -34,7 +35,7 @@ if (!isset($_SESSION['loggedin'])) {
         </div>
 
         <!-- Tutorial -->
-        <div class="row mt-5" id="card-row">
+        <div class="row card-row mt-5">
             <div class="col-12">
                 <div class="card rounded-0 border-0">
                     <div class="row">
@@ -56,7 +57,7 @@ if (!isset($_SESSION['loggedin'])) {
         </div>
 
         <!-- Identify -->
-        <div class="row mt-5" id="card-row">
+        <div class="row card-row mt-5">
             <div class="col-12">
                 <div class="card rounded-0 border-0">
                     <div class="row">
@@ -78,7 +79,7 @@ if (!isset($_SESSION['loggedin'])) {
         </div>
 
         <!-- Contribution -->
-        <div class="row mt-5" id="card-row"> 
+        <div class="row card-row mt-5"> 
             <div class="col-12">
                 <div class="card rounded-0 border-0">
                     <div class="row">
@@ -99,6 +100,7 @@ if (!isset($_SESSION['loggedin'])) {
             </div>
         </div>
     </div>
+    
 <?php include_once "footer.php" ?> 
 </body>
 </html>

@@ -1,15 +1,70 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerCheckbox = document.getElementById('hamburger-checkbox');
+    const fullWidthMenu = document.getElementById('full-width-menu');
+
+    hamburgerCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            fullWidthMenu.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        } else {
+            fullWidthMenu.classList.remove('show');
+            document.body.style.overflow = ''; // Restore scrolling when menu is closed
+        }
+    });
+
+    // Close menu when clicking a link
+    const menuLinks = fullWidthMenu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburgerCheckbox.checked = false;
+            fullWidthMenu.classList.remove('show');
+            document.body.style.overflow = '';
+        });
+    });
+});
+
+let mybutton = document.getElementById("btn-back-to-top");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+    ) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", backToTop);
+
+function backToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+}
+
+document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav');
     const defaultLogo = document.getElementById('default-logo');
     const scrolledLogo = document.getElementById('scrolled-logo');
     const userContent = document.querySelectorAll('.user-content');
 
-    // Get the current path
-    const currentPath = window.location.pathname;
-    console.log(currentPath); // Debugging: check the current path
+    // Debugging to check the pathname
+    console.log("window.location.pathname:", window.location.pathname);
 
-    // Check if the current page is index.php (more flexible check)
-    const isIndexPage = currentPath.endsWith('index.php');
+    // Get the current path without the query string or hash
+    const currentPath = window.location.pathname.split('/').pop().toLowerCase() || 'index.php'; // Default to 'index.php' if empty
+
+    console.log("Current path after split:", currentPath); // Debugging
+
+    // Check if the current page is index.php, login.php, or registration.php
+    const isIndexPage = currentPath === 'index.php';
 
     if (isIndexPage) {
         // Apply scroll behavior only for index.php
@@ -23,11 +78,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     element.style.backgroundColor = 'transparent';
                 });
 
+                // Change hamburger bar color when scrolled
+                document.querySelectorAll('.bar').forEach(function(bar) {
+                    bar.style.backgroundColor = 'rgba(74, 74, 74, 1)'; // Color for scrolled state
+                });
             } else {
                 nav.style.color = 'rgba(242, 242, 240, 1)';
                 nav.style.backgroundColor = 'transparent';
                 defaultLogo.style.display = 'block';
                 scrolledLogo.style.display = 'none';
+
+                // Reset hamburger bar color when at the top
+                document.querySelectorAll('.bar').forEach(function(bar) {
+                    bar.style.backgroundColor = 'rgba(242, 242, 240, 1)'; // Color for transparent navbar
+                });
             }
         });
 
@@ -37,32 +101,54 @@ document.addEventListener('DOMContentLoaded', function() {
             nav.style.color = 'rgba(74, 74, 74, 1)';
             defaultLogo.style.display = 'none';
             scrolledLogo.style.display = 'block';
-            userIcon.style.backgroundColor = 'transparent';
             userContent.forEach(function(element) {
                 element.style.backgroundColor = 'transparent';
             });
 
+            // Set hamburger bar color for initial scroll
+            document.querySelectorAll('.bar').forEach(function(bar) {
+                bar.style.backgroundColor = 'rgba(74, 74, 74, 1)';
+            });
         } else {
             nav.style.color = 'rgba(242, 242, 240, 1)';
             nav.style.backgroundColor = 'transparent';
             defaultLogo.style.display = 'block';
             scrolledLogo.style.display = 'none';
+
+            // Set hamburger bar color for initial top state
+            document.querySelectorAll('.bar').forEach(function(bar) {
+                bar.style.backgroundColor = 'rgba(242, 242, 240, 1)';
+            });
         }
     } else {
-        // Apply static navbar design for other pages
+        // Apply static navbar design for all other pages
         nav.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
         nav.style.color = 'rgba(74, 74, 74, 1)';
+
         userContent.forEach(function(element) {
             element.style.backgroundColor = 'transparent';
         });
 
         if (defaultLogo && scrolledLogo) {
-            // Show scrolled logo by default for other pages
             scrolledLogo.style.display = 'block';
             defaultLogo.style.display = 'none';
         }
+
+        // Set hamburger bar color for static navbar
+        document.querySelectorAll('.bar').forEach(function(bar) {
+            bar.style.backgroundColor = 'rgba(74, 74, 74, 1)';
+        });
     }
+
+    // Hamburger menu toggle functionality
+    document.getElementById("hamburger-btn").addEventListener("click", function() {
+        var fullWidthMenu = document.getElementById("full-width-menu");
+        fullWidthMenu.classList.toggle("show"); // Toggle the "show" class
+    });
 });
+
+
+
 
 let slideIndex = 0;
 autoSlide();

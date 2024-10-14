@@ -57,10 +57,9 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
-.nav-left{
+.nav-left {
     display: flex;
     flex: 1;
     justify-content: left;
@@ -79,11 +78,11 @@ nav {
     flex-grow: 1;
 }
 
-#default-logo{
+#default-logo {
     display: block;
 }
 
-#scrolled-logo{
+#scrolled-logo {
     display: none;
 }
 
@@ -110,7 +109,7 @@ nav {
     transition: color 0.3s ease; /* Smooth color transition */
 }
 
-.nav-menu{
+.nav-menu {
     margin-top: 0.8vh;
 }
 
@@ -143,13 +142,12 @@ nav {
     object-fit: cover;   /* Ensures the image covers the entire area without distortion */
 }
 
-
-.user-container{
+.user-container {
     position: relative;
     display: inline-block;
 }
 
-.user-content{
+.user-content {
     display: none;
     position: absolute;
     background-color: transparent;
@@ -157,12 +155,9 @@ nav {
     padding-top: 3vh;
 }
 
-
-
-.user-container:hover .user-content{
+.user-container:hover .user-content {
     display: block;
 }
-
 
 /* Fading animation */
 @keyframes fadeIn {
@@ -173,6 +168,94 @@ nav {
 @keyframes fadeOut {
     0% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+/* Hamburger menu styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 2002; /* Ensure it's above the full-width menu */
+}
+
+.bar {
+    height: 3px;
+    width: 25px;
+    background-color: rgba(74, 74, 74, 1);
+    margin: 3px 0;
+    transition: 0.4s;
+}
+
+.full-width-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 2001;
+    overflow-y: auto;
+    overflow-x: hidden; /* Hide horizontal scroll */
+}
+
+.full-width-menu.show {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-content {
+    text-align: center;
+}
+
+.menu-content a {
+    display: block;
+    color: rgba(74, 74, 74, 1);
+    font-size: 20px;
+    margin: 15px 0;
+    text-decoration: none;
+}
+
+/* Hidden checkbox */
+.hamburger-checkbox {
+    display: none;
+}
+
+/* Hamburger animation */
+.hamburger-checkbox:checked + .hamburger .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger-checkbox:checked + .hamburger .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-checkbox:checked + .hamburger .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Media Queries */
+@media screen and (max-width: 1000px) {
+    .nav-right {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 1001px) {
+    .hamburger {
+        display: none;
+    }
+
+    .nav-container {
+        display: flex;
+    }
 }
 
 /* Scroll Down Icon */
@@ -228,7 +311,6 @@ nav {
     position: relative;
     width: 100%;
     height: 100vh;
-    
     overflow: hidden;
 }
 
@@ -253,12 +335,23 @@ nav {
     object-fit: cover; /* This ensures the image covers the viewport without distortion */
 }
 
-.slide-text {
+/* Slide content styling */
+.slide-content {
     position: absolute;
-    bottom: 20%; /* Position the text at the bottom */
-    left: 70%; /* Center the text horizontally */
-    transform: translateX(-50%); /* Adjust to perfectly center it */
-    color: #F2F2F0; /* Text color */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 2; /* Make sure it appears above the images */
+}
+
+/* Styling for the heading */
+.slide-content h1 {
+    color: #F2F2F0;
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 /* Index Content 1 */
@@ -395,16 +488,15 @@ nav {
 
 #menu-body{
     width: 100vw;   
-    height: 100vh;
-    background-color: #F2F2F0;
     overflow-x: hidden;
 }
 
 #card-container{
-    margin-top: 15vh;
+    margin-top: 18vh;
     width: 100vw;
-    background-color: #F2F2F0;
+    margin-bottom: 10vh;
 }
+
 
 #card-img-1{
     height: 100%;
@@ -417,7 +509,7 @@ nav {
 }
 
 #reg-container{
-    margin-top: 5%;
+    margin-top: 12vh;
     width: 100%;
 }
 
@@ -450,6 +542,7 @@ nav {
 
 #login-container{
     margin-top: 25vh;
+    margin-bottom: 8vh;
     width: 100%;
 }
 
@@ -501,6 +594,14 @@ nav {
     bottom: 0;
     left: 0;
     transition: width 0.3s ease; /* Animate width when focused */
+}
+
+/* Forget Password Pages */
+
+#forgetPassword{
+    margin-top: 25vh;
+    margin-bottom: 28vh;
+    width: 100%;
 }
 
 /* Footer Design */
@@ -556,7 +657,7 @@ footer p{
 /* Classify Page */
 
 .classify-container{
-    margin-top: 10vh;
+    margin-top: 17vh;
     margin-bottom: 10vh;
 }
 
@@ -603,7 +704,7 @@ h5.classify-titles {
 }
 
 .tutorial-top-container{
-    margin-top: 15vh;
+    margin-top: 18vh;
 }
 
 .tutorial-top-img{
@@ -611,14 +712,64 @@ h5.classify-titles {
     height: 30vh;
 }
 
+.tutorial-img{
+    width: 80%;
+}
+
 .tutorial-title{
     color: #4A4A4A;
+}
+
+/* Custom class for images */
+.tutorial-custom-img {
+    width: 30%; /* Ensure image fills the width of the column */
+    height: 30%; /* Set a uniform height for all images */
+    object-fit: cover; /* Maintain aspect ratio while filling the space */
+    border-radius: 8px; /* Soft rounded corners for a modern look */
+    border: 1px solid #ddd; /* Light border for minimal design */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tutorial-custom-img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Custom class for image headings */
+.tutorial-img-heading {
+    font-size: 13px;  /* Smaller font size for minimalist look */
+    font-weight: normal;  /* Make font weight lighter */
+    margin-top: 10px;  /* Space between image and heading */
+    color: #333;  /* Dark gray for a softer contrast */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .tutorial-custom-img {
+        height: 180px; /* Smaller height for smaller screens */
+    }
+    .tutorial-img-heading {
+        font-size: 12px;  /* Even smaller font size on mobile */
+    }
+}
+
+/* Search Page */
+.search-container{
+    margin-top: 18vh;
+    margin-bottom: 5vh;
+}
+
+#search-img{
+    width: 100%; 
+    aspect-ratio: 1;
+    object-fit: cover;
 }
 
 /* Update Profile  */
 
 #update-form{
-    margin-top: 10vh;
+    margin-top: 17vh;
     margin-bottom: 10vh;
 }
 
@@ -659,7 +810,7 @@ h5.classify-titles {
 /* Contribute Page */ 
 
 .contribute-button{
-    margin-top: 15vh;
+    margin-top: 18vh;
     margin-bottom: 5vh;
 }
 
@@ -682,14 +833,39 @@ h5.classify-titles {
 /* Plant Detail Page */
 
 .detail-container{
-    margin-top: 12vh;
-    width: 40vw !important;
+    margin-top: 18vh;
+    width: 35vw !important;
+}
+
+@media screen and (max-width: 768px) {
+    .detail-container{
+        width: 90vw !important;
+    }
 }
 
 /* Identify Page */
+.identify-container{
+    width: 60vw;
+    height: 60vh;
+    margin-top: 20vh;
+    margin-bottom: 10vh;
+    
+}
 
+.identify-form{
+    display: flex;
+    justify-content: center;
+}
+
+.identify-upload{
+    display: flex;
+    justify-content: center;
+
+}
 
 .upload-container {
+    width: 60vw;
+    height: 40vh;
     border: 2px dashed #ccc;
     padding: 20px;
     text-align: center;
@@ -698,7 +874,17 @@ h5.classify-titles {
     border-radius: 5px;
 }
 
+/* Back to Top */
 
+    #btn-back-to-top {
+        position: fixed;
+        bottom: 20vh;
+        right: 20px;
+        display: none;
+        z-index: 2000;
+    }
+  /* End of Back to Top */
+  
 
 /* About Page */
 
@@ -710,6 +896,3 @@ h5.classify-titles {
 
 
 
-@media screen and (max-width: 768px) {
-    
-}

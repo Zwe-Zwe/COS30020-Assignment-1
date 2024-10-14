@@ -1,7 +1,14 @@
+<!-- Back to top button -->
+<button
+        type="button"
+        class="btn btn-danger btn-floating btn-lg"
+        id="btn-back-to-top"
+        >
+  <i class="fas fa-arrow-up"></i>
+</button>
 <!-- footer.php -->
-
-<footer>
-    <div class="container-fluid" id="footer-container">
+<footer id="footer">
+    <div class="container-fluid px-5" id="footer-container">
         <!-- First Row -->
         <div class="row mb-4 p-2 px-0 pt-4">
             <div class="col-md-4 col-12 d-flex justify-content-md-start justify-content-center mb-3 mb-md-0">
@@ -18,7 +25,7 @@
         <!-- Second Row -->
         <div class="row px-0 pb-3">
             <div class="col-md-4 col-12 d-flex justify-content-md-start justify-content-center mb-3 mb-md-0">
-                <p><a href="classify.php" class="footer-a">Classify</a> | <a href="tutorial.php" class="footer-a">Tutorial</a> | <a href="contribute.php" class="footer-a">Contribute</a></p>
+                <p><a href="main_menu.php" class="footer-a">Menu</a> | <a href="login.php" class="footer-a">Log In</a> | <a href="registration.php" class="footer-a">Register</a></p>
             </div>
             <div class="col-md-4 col-12 d-flex justify-content-md-center justify-content-center mb-3 mb-md-0">
                 <a href="index.php"><img src="img/logo-alter.png" class="img-fluid" id="footer-img"></a>

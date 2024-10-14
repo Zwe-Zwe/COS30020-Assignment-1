@@ -1,4 +1,5 @@
 <?php
+session_name('Zwe_Het_Zaw');
 session_start();
 include_once 'head.php' ?>
 <body>
@@ -59,7 +60,6 @@ include_once 'head.php' ?>
             <a href="index.php" class="btn btn-success">Back to Home Page</a>
         </div>
     </div>
-
     <?php include_once "footer.php" ?>
 </body>
 </html>

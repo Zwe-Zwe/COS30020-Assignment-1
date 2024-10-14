@@ -1,4 +1,5 @@
 <?php
+session_name('Zwe_Het_Zaw');
 session_start();  // Start the session to manage user state
 
 // Initialize an error message variable
@@ -10,10 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
     // Open the user file for reading
-    if (!file_exists("user.txt")) {
+    if (!file_exists("data/user.txt")) {
         $error_message = "User file not found.";
     } else {
-        $file = fopen("user.txt", "r");
+        $file = fopen("data/user.txt", "r");
 
         // Flag to track if a user is found
         $user_found = false;
@@ -113,6 +114,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </form>
     </div>
-    <script src="script.js"></script>
+    <?php include_once 'footer.php' ?>
 </body>
 </html>

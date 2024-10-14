@@ -1,5 +1,7 @@
-<?php session_start(); ?>
 <?php
+session_name('Zwe_Het_Zaw');
+session_start(); 
+
 // Retrieve errors and form data from the session
 $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
 $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
@@ -7,8 +9,8 @@ $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 // Clear session errors and form data
 unset($_SESSION['errors']);
 unset($_SESSION['form_data']);
-?>
-<?php include_once "head.php"; ?>
+include_once "head.php"; ?>
+
 <body id="reg-body">
     <?php include_once "header.php"; ?>
     <div class="container d-flex justify-content-center" id="reg-container">
@@ -107,6 +109,6 @@ unset($_SESSION['form_data']);
             </div>
         </form>
     </div>
-    <script src="script.js"></script>
+    <?php include_once 'footer.php' ?>
 </body>
 </html>

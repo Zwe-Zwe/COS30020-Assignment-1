@@ -1,4 +1,5 @@
 <?php
+session_name('Zwe_Het_Zaw');
 session_start();
 
 // Include Composer autoloader if installed via Composer

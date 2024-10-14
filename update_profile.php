@@ -1,8 +1,9 @@
 <?php
+session_name('Zwe_Het_Zaw');
 session_start();
 
 // File path
-$file = 'user.txt';
+$file = 'data/user.txt';
 
 // Function to get user data based on email
 function getUserData($email, $file) {
@@ -180,10 +181,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- Update Button -->
         <div class="row mb-3 p-3">
-            <div class="col-md-6 d-flex justify-content-center">
+            <div class="col-md-6 d-flex justify-content-center mb-3">
                 <input type="submit" class="btn btn-primary rounded-0 d-flex custom-btn" value="Update">
             </div>
-            <div class="col-md-6 d-flex justify-content-center">
+            <div class="col-md-6 d-flex justify-content-center mb-3">
                 <a href="view_profile.php" class="btn btn-secondary rounded-0 d-flex custom-btn d-flex justify-content-center">Cancel</a>
             </div>
         </div>
